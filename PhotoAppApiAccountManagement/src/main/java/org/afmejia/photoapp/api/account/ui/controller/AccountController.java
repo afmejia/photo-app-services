@@ -1,5 +1,9 @@
 package org.afmejia.photoapp.api.account.ui.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("/account")
 public class AccountController {
@@ -8,3 +12,4 @@ public class AccountController {
     public String status() {
         return "Working..";
     }
+}
