@@ -2,7 +2,11 @@ package org.afmejia.photoapp.api.users.ui.controllers;
 
 import javax.validation.Valid;
 
+import org.afmejia.photoapp.api.users.service.UsersService;
+import org.afmejia.photoapp.api.users.shared.UserDto;
 import org.afmejia.photoapp.api.users.ui.model.CreateUserRequestModel;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +21,9 @@ public class UsersController {
 	
 	@Autowired
 	private Environment env;
+	
+	@Autowired
+	UsersService usersService;
 
     @GetMapping("/status/check")
     public String status() {
@@ -25,6 +32,12 @@ public class UsersController {
     
     @PostMapping
     public String createUser(@Valid @RequestBody CreateUserRequestModel userDetails) {
+    	ModelMapper modelMapper = new ModelMapper();
+    	modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+    	
+    	UserDto userDto = modelMapper.map(userDetails, UserDto.class);
+    	usersService.createUser(userDto);
+    	
     	return "Create user method is called";
     }
 }
