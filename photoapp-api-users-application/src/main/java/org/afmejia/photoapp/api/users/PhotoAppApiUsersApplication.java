@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-// @EnableDiscoveryClient
+@EnableDiscoveryClient
 public class PhotoAppApiUsersApplication {
 
 	public static void main(String[] args) {
